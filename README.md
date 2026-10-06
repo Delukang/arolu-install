@@ -16,3 +16,5 @@ curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install
  ```bash
 curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
 ```
+
+安装完成后，请在私有 SSH 终端安全保存登录资料。2FA 二维码为仅 root 可读的 PNG；安装输出提供私密下载说明，也可手动输入绑定密钥。升级保留密码、验证器、账户、账本及卡片模式，暂停卡片不会自动启动；运行卡片在限制解除、条件满足后按原参数交易。更新内容、二维码下载步骤和尚未验证的范围见 [Release 说明](https://github.com/Delukang/arolu-install/releases)。
