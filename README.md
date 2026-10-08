@@ -12,9 +12,15 @@
 curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
 ```
 
- 更新版本命令：
+当前安装入口为 **v0.6.0 预览版**；原稳定版本保留在 Releases。旧客户端首次升级仍使用原安装命令：
  ```bash
 curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
 ```
 
-安装完成后，请在私有 SSH 终端安全保存登录资料。2FA 二维码为仅 root 可读的 PNG；安装输出提供私密下载说明，也可手动输入绑定密钥。升级保留密码、验证器、账户、账本及卡片模式，暂停卡片不会自动启动；运行卡片在限制解除、条件满足后按原参数交易。更新内容、二维码下载步骤和尚未验证的范围见 [Release 说明](https://github.com/Delukang/arolu-install/releases)。
+安装完成后，请在私有 SSH 终端安全保存登录资料。2FA 二维码为仅 root 可读的 PNG；安装输出提供私密下载说明，也可手动输入绑定密钥。
+
+首次升级到 v0.6.0 前，请先按原流程结束旧卡片管理并删除旧卡，核清未决订单和恢复任务；安装器不会代为平仓或清理。旧资产映射不迁移，已结算记录保留，新版个人配对规则须重新配置。迁移后不能回退到不兼容的旧程序，也不能恢复旧数据库后继续交易。
+
+升级后从 **设置与帮助 → 版本与更新** 查看版本、检查更新、选择稳定／预览渠道并确认升级。系统不会自动升级；异常及暂停卡片不会因升级自动恢复运行。稳定版不会因发布下一个版本自动晋升。
+
+本次预览发布未开展新增账户、新交易和人工操作、带原单重启的真实账户验收，也未开展完整界面升级、公网证书、首显及长时间性能验收。技术回归和隔离安装验证不代表这些项目验收通过。更新内容和升级限制见 [v0.6.0 说明](https://github.com/Delukang/arolu-install/releases/tag/customer-bebf8d1de42b2c21866e631047dce974c6eb32b0)。
