@@ -2,8 +2,14 @@
 # Arolu public bootstrap. Only a complete, fixed-key-verified installer executes.
 set -eu
 arolu_install() {
-    if [ "$#" -ne 0 ]; then
-        echo '安装自动识别公网 IPv4，不接受手动 IP 或其他参数。' >&2
+    local scope=full
+    if [ "$#" -eq 2 ] && [ "$1" = '--scope' ]; then
+        case "$2" in
+            full|web) scope="$2" ;;
+            *) echo '安装范围只接受 --scope full 或 --scope web。' >&2; return 1 ;;
+        esac
+    elif [ "$#" -ne 0 ]; then
+        echo '安装自动识别公网 IPv4，仅接受可选参数 --scope full|web。' >&2
         return 1
     fi
     if [ "$(id -u)" -ne 0 ]; then
@@ -16,20 +22,21 @@ arolu_install() {
             return 1
         fi
     done
-    python3 - <<'AROLU_BOOTSTRAP'
+    python3 - "$scope" <<'AROLU_BOOTSTRAP'
 import base64
 import hashlib
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import urllib.request
 import urllib.error
 from urllib.parse import urlsplit
 
 PUBLIC_KEY_B64 = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQTEwVVo0bDkrM25veklzaEc4b2hqOHBpRVFxc3BKSTNxdzFHZ29yUjdFRk09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo='
-RELEASE = 'eab97aaa4bec9e8a42e49d9479ac3c5f84fb0823'
-INSTALLER_SHA256 = '182045ac6559915c574898a0be2cb5a9fd9d3221236e6bf2b9ba80a58e8d707d'
+RELEASE = 'bebf8d1de42b2c21866e631047dce974c6eb32b0'
+INSTALLER_SHA256 = 'bff54b01d0d0ffe48fc0ec8b3fc6551cb4c37debb4f89faea6324f4c55968950'
 SOURCE = 'https://github.com/Delukang/arolu-install/releases/download/customer-'+RELEASE
 
 
@@ -44,8 +51,9 @@ def fetch(name, target, maximum):
     except (urllib.error.URLError, TimeoutError, ConnectionError):
         raise RuntimeError('GitHub Releases 下载失败；尚未执行安装程序，请检查网络后重试。') from None
 
-def main():
+def main(scope='full'):
     try:
+        if scope not in ('full','web'):raise ValueError('安装范围只接受 full 或 web。')
         os.umask(0o077)
         with tempfile.TemporaryDirectory(prefix='arolu-bootstrap-') as temp:
             root=Path(temp)
@@ -58,11 +66,13 @@ def main():
             if result.returncode:raise ValueError('安装引导验签失败，已停止；不会改装旧版本。')
             if hashlib.sha256(installer.read_bytes()).hexdigest()!=INSTALLER_SHA256:
                 raise ValueError('安装引导版本或哈希不同，已停止；不会降级执行。')
-            subprocess.run(['python3',str(installer)],check=True)
+            subprocess.run(['python3',str(installer),'--scope',scope],check=True)
     except (ValueError,RuntimeError,OSError,subprocess.CalledProcessError) as exc:
         raise SystemExit('安装未完成：'+str(exc))
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    if len(sys.argv)!=2:raise SystemExit('安装范围参数无效。')
+    main(sys.argv[1])
 
 AROLU_BOOTSTRAP
 }
