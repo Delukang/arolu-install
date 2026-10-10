@@ -12,7 +12,7 @@
 curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
 ```
 
-当前安装入口为 **v0.6.0 预览版**；原稳定版本保留在 Releases。旧客户端首次升级仍使用原安装命令：
+当前安装入口为 **v0.6.8 预览版**；原稳定版本保留在 Releases。旧客户端首次升级仍使用原安装命令：
  ```bash
 curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
 ```
@@ -23,4 +23,4 @@ curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install
 
 升级后从 **设置与帮助 → 版本与更新** 查看版本、检查更新、选择稳定／预览渠道并确认升级。系统不会自动升级；异常及暂停卡片不会因升级自动恢复运行。稳定版不会因发布下一个版本自动晋升。
 
-本次预览发布未开展新增账户、新交易和人工操作、带原单重启的真实账户验收，也未开展完整界面升级、公网证书、首显及长时间性能验收。技术回归和隔离安装验证不代表这些项目验收通过。更新内容和升级限制见 [v0.6.0 说明](https://github.com/Delukang/arolu-install/releases/tag/customer-bebf8d1de42b2c21866e631047dce974c6eb32b0)。
+本次预览发布未开展新增账户、新交易和人工操作、带原单重启的真实账户验收，也未开展完整界面升级、公网证书、首显及长时间性能验收。技术回归和隔离安装验证不代表这些项目验收通过。更新内容和升级限制见 [v0.6.8 说明](https://github.com/Delukang/arolu-install/releases/tag/customer-2f102a7a18e5349d4c5500c3b705a17f74a621dc)。
