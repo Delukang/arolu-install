@@ -35,8 +35,8 @@ import urllib.error
 from urllib.parse import urlsplit
 
 PUBLIC_KEY_B64 = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQTEwVVo0bDkrM25veklzaEc4b2hqOHBpRVFxc3BKSTNxdzFHZ29yUjdFRk09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo='
-RELEASE = '22768654161eeb63b11cfe3c9c0479acc548b862'
-INSTALLER_SHA256 = '8ddf7ec3b05a234e7b67b860823870529d9b7a09f96a7e8682b71bae6d086968'
+RELEASE = '3ebf40a8ac40efba5bb9643033f50d4ceb1df578'
+INSTALLER_SHA256 = '6b5ad6bc12830275735acf227de4fb401449101877c223dd7e2d0177e8d5bcc4'
 SOURCE = 'https://github.com/Delukang/arolu-install/releases/download/customer-'+RELEASE
 
 
@@ -66,7 +66,8 @@ def main(scope='full'):
             if result.returncode:raise ValueError('安装引导验签失败，已停止；不会改装旧版本。')
             if hashlib.sha256(installer.read_bytes()).hexdigest()!=INSTALLER_SHA256:
                 raise ValueError('安装引导版本或哈希不同，已停止；不会降级执行。')
-            subprocess.run(['python3',str(installer),'--scope',scope],check=True)
+            result=subprocess.run(['python3',str(installer),'--scope',scope])
+            if result.returncode:raise SystemExit(result.returncode)
     except (ValueError,RuntimeError,OSError,subprocess.CalledProcessError) as exc:
         raise SystemExit('安装未完成：'+str(exc))
 
