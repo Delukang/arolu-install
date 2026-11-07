@@ -35,8 +35,8 @@ import urllib.error
 from urllib.parse import urlsplit
 
 PUBLIC_KEY_B64 = 'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQTEwVVo0bDkrM25veklzaEc4b2hqOHBpRVFxc3BKSTNxdzFHZ29yUjdFRk09Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo='
-RELEASE = '39d1a1d8be63c2bacc79bb778ea2c999a1ce24ac'
-INSTALLER_SHA256 = 'd00bb99c4175827d0690b9f994b47a4a5d0870a9eb47be17ad06fb7347180a32'
+RELEASE = '22d047939fc7b696ed1941ad2402322585dc54cf'
+INSTALLER_SHA256 = 'bb6b6574f6cea832dbb00ec1c5bb77068868e8d5ce6901efab5a26b999803e8b'
 SOURCE = 'https://github.com/Delukang/arolu-install/releases/download/customer-'+RELEASE
 
 
