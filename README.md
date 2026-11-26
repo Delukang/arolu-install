@@ -9,7 +9,7 @@
 唯一安装命令（始终安装最新发布版本）：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Delukang/arolu-install/main/install.sh | sudo bash
+curl -fsSL --proto '=https' https://github.com/Delukang/arolu-go-release/releases/download/packages/install.sh -o install.sh && sudo sh install.sh
 ```
 
 安装完成后，请在私有 SSH 终端安全保存登录资料。2FA 二维码为仅 root 可读的 PNG；安装输出提供私密下载说明，也可手动输入绑定密钥。
